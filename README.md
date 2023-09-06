@@ -49,4 +49,4 @@ http://localhost:8080/swagger-ui/index.html
 
 # Implementation choices
 
-Due to the acceptable O(n) time complexity of the implemented algorithm, i chose to only cache the endpoint’s invocations to save on space complexity.
+Due to the acceptable O(n) time complexity of the implemented algorithm, I chose to only cache the endpoint’s invocations to save on space complexity.
