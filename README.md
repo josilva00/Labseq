@@ -1,6 +1,9 @@
 # LabSeq Application
 
-This repository contains the containerized version of the LabSeq Application.
+This repository contains the containerized version of the LabSeq Application returning a value from the labseq
+sequence defined as  l(n) = l(n-4) + l(n-3)
+
+
 
 ## Prerequisites
 
