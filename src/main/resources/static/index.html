@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LabSeq Calculator</title>
+</head>
+<body>
+
+<!-- Input Form -->
+<div>
+  <label for="numberInput">Enter a non-negative number:</label>
+  <input type="number" id="numberInput">
+  <button id="computeButton" onclick="getLabSeqValue()">Compute LabSeq</button>
+  <span id="loadingMessage" style="display:none;">Loading...</span>
+</div>
+
+<!-- Display Result -->
+<div id="result" style="white-space: pre-wrap; width: 300px; overflow-wrap: break-word;"></div>
+
+
+<script>
+  async function getLabSeqValue() {
+    const numberInput = document.getElementById("numberInput");
+    const computeButton = document.getElementById("computeButton");
+    const loadingMessage = document.getElementById("loadingMessage");
+    const resultDiv = document.getElementById("result");
+
+    const number = numberInput.value;
+
+    // Check if a number is provided
+    if (isNaN(number) || number.trim() === "") {
+      resultDiv.innerText = "Please provide a valid number.";
+      return;
+    }
+
+    // Check if the number is bigger or equal than 0
+    if (number <= 0) {
+      resultDiv.innerText = "Please enter a non-negative number.";
+      return;
+    }
+
+    // Disable the input and button and show the loading message
+    numberInput.disabled = true;
+    computeButton.disabled = true;
+    loadingMessage.style.display = "inline";
+
+    try {
+      const response = await fetch(`http://localhost:8080/labseq/${number}`);
+
+      // Re-enable the input and button and hide the loading message
+      numberInput.disabled = false;
+      computeButton.disabled = false;
+      loadingMessage.style.display = "none";
+
+      const data = await response.json();
+      resultDiv.innerText = `The LabSeq value for ${number} is: ${data.result}`;
+    } catch (error) {
+      alert("There was an error fetching the LabSeq value. Please try again.");
+      numberInput.disabled = false;
+      computeButton.disabled = false;
+      loadingMessage.style.display = "none";
+    }
+  }
+</script>
+
+</body>
+</html>
