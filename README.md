@@ -46,3 +46,7 @@ The REST API documentation can be accessed by navigating to:
 ```
 http://localhost:8080/swagger-ui/index.html
 ```
+
+# Implementation choices
+
+Due to the acceptable O(n) time complexity of the implemented algorithm, i chose to only cache the endpoint’s invocations to save on space complexity.
